@@ -43,6 +43,13 @@ The resulting plan prioritizes high-risk zones first and returns:
 - Bench and protected volunteer lists.
 - Coverage, fairness, fatigue, and critical gap metrics.
 
+## Product Architecture
+
+- `src/data.ts`: typed volunteer roster, zone map, incidents, and scenario definitions.
+- `src/optimizer.ts`: deterministic scoring and deployment planning engine.
+- `src/app/page.tsx`: real-time command center surface, map nodes, route visualization, AI dispatch panel, and keyboard controls.
+- `src/app/globals.css`: dark command-center design tokens, glass system, map grid, motion, and accessibility styles.
+
 ## Tech Stack
 
 - React 19
