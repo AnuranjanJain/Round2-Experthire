@@ -234,6 +234,7 @@ function TopCommandBar({
       <div className="grid h-12 shrink-0 grid-cols-4 gap-1 rounded-2xl bg-black/20 p-1">
         {scenarioOrder.map((mode) => (
           <button
+            aria-label={`Activate ${scenarioLabels[mode]} mode`}
             aria-keyshortcuts={`${scenarioOrder.indexOf(mode) + 1}`}
             className={`command-focus relative min-w-20 rounded-xl px-2 text-xs font-black transition-colors 2xl:min-w-24 2xl:text-sm ${
               scenario.mode === mode ? 'text-[#06100c]' : 'text-[color:var(--muted)] hover:text-[color:var(--text)]'
