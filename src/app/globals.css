@@ -132,6 +132,19 @@ button:disabled {
   color: #edf7f2;
 }
 
+.command-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(45, 212, 131, 0.32) transparent;
+}
+
+.command-scrollbar::-webkit-scrollbar {
+  height: 4px;
+}
+
+.command-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(45, 212, 131, 0.32);
+}
+
 .glass-panel {
   border: 1px solid var(--line);
   background:

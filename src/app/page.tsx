@@ -230,7 +230,7 @@ function TopCommandBar({
   onAddIncident: () => void
 }) {
   return (
-    <Glass className="flex min-h-16 items-center gap-2 overflow-x-auto overflow-y-hidden px-2" label="Top command bar">
+    <Glass className="command-scrollbar flex min-h-16 items-center gap-2 overflow-x-auto overflow-y-hidden px-2" label="Top command bar">
       <div className="grid h-12 shrink-0 grid-cols-4 gap-1 rounded-2xl bg-black/20 p-1">
         {scenarioOrder.map((mode) => (
           <button
