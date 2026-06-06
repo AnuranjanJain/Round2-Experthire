@@ -75,6 +75,17 @@ npm run lint
 npm run build
 ```
 
+## Deploy
+
+The project is ready for Vercel or any host that supports Next.js static prerendering:
+
+```powershell
+npm run build
+npm run start
+```
+
+For Vercel, import the GitHub repository and keep the default Next.js build settings.
+
 ## Demo Flow
 
 1. Start on the SevaGrid Command dashboard and show current coverage and high-risk zones.
