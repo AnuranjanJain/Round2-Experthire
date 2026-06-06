@@ -303,6 +303,9 @@ function TopCommandBar({
       >
         <Plus aria-hidden="true" size={16} />
         Incident
+        <span className="rounded-md bg-black/30 px-1.5 py-0.5 text-[10px] uppercase tracking-[0.08em] text-[color:var(--text-soft)]">
+          A
+        </span>
       </button>
     </Glass>
   )
