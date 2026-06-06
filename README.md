@@ -77,6 +77,13 @@ npm run build
 5. Add an incident and show how the incident queue and zone risk update.
 6. Mark a ticket as sent and point out the fatigue/fairness guardrails.
 
+## Operator Shortcuts
+
+- `1-6`: select priority-ranked zones on the live map.
+- `[` / `]` or arrow keys: cycle operation scenarios.
+- `A`: add a new live incident and move focus to the affected sector.
+- `T`: collapse or expand the activity timeline.
+
 ## Submission Notes
 
 - Project is original for the Round 2 AI-Assisted Product Build Challenge.
