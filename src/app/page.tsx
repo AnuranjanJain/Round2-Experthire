@@ -155,7 +155,7 @@ function StatusPill({
   tone?: Tone
 }) {
   return (
-    <span className={`inline-flex min-h-8 items-center gap-2 rounded-full px-3 text-[11px] font-black uppercase tracking-[0.08em] ${toneClass(tone)}`}>
+    <span className={`inline-flex min-h-8 min-w-0 items-center gap-1.5 rounded-full px-2.5 text-[10px] font-black uppercase tracking-[0.08em] sm:gap-2 sm:px-3 sm:text-[11px] ${toneClass(tone)}`}>
       {children}
     </span>
   )
@@ -230,13 +230,16 @@ function TopCommandBar({
   onAddIncident: () => void
 }) {
   return (
-    <Glass className="command-scrollbar flex min-h-16 items-center gap-2 overflow-x-auto overflow-y-hidden px-2" label="Top command bar">
-      <div className="grid h-12 shrink-0 grid-cols-4 gap-1 rounded-2xl bg-black/20 p-1">
+    <Glass
+      className="grid w-full max-w-full grid-cols-2 gap-2 overflow-hidden p-2 sm:grid-cols-4 xl:flex xl:min-h-16 xl:items-center xl:overflow-x-auto xl:overflow-y-hidden xl:px-2"
+      label="Top command bar"
+    >
+      <div className="col-span-2 grid min-h-12 grid-cols-2 gap-1 rounded-2xl bg-black/20 p-1 sm:col-span-4 sm:grid-cols-4 xl:h-12 xl:w-auto xl:shrink-0">
         {scenarioOrder.map((mode) => (
           <button
             aria-label={`Activate ${scenarioLabels[mode]} mode`}
             aria-keyshortcuts={`${scenarioOrder.indexOf(mode) + 1}`}
-            className={`command-focus relative min-w-20 rounded-xl px-2 text-xs font-black transition-colors 2xl:min-w-24 2xl:text-sm ${
+            className={`command-focus relative min-h-10 min-w-0 rounded-xl px-1.5 text-xs font-black transition-colors xl:min-w-20 xl:px-2 2xl:min-w-24 2xl:text-sm ${
               scenario.mode === mode ? 'text-[#06100c]' : 'text-[color:var(--muted)] hover:text-[color:var(--text)]'
             }`}
             key={mode}
@@ -250,12 +253,12 @@ function TopCommandBar({
                 transition={{ type: 'spring', stiffness: 420, damping: 34 }}
               />
             )}
-            <span className="relative z-10">{scenarioLabels[mode]}</span>
+            <span className="relative z-10 block truncate">{scenarioLabels[mode]}</span>
           </button>
         ))}
       </div>
 
-      <label className="flex h-12 min-w-44 items-center gap-3 rounded-2xl bg-black/20 px-3">
+      <label className="col-span-2 flex h-12 min-w-0 items-center gap-3 rounded-2xl bg-black/20 px-3 sm:col-span-4 xl:min-w-44 xl:shrink-0">
         <ListFilter aria-hidden="true" className="text-[color:var(--muted)]" size={16} />
         <select
           aria-label="Skill filter"
@@ -270,15 +273,15 @@ function TopCommandBar({
         </select>
       </label>
 
-      {[
+      {[ 
         ['Crowd', 'crowdIntensity'],
         ['Heat', 'weatherStress'],
       ].map(([label, key]) => (
-        <label className="flex h-12 min-w-32 items-center gap-3 rounded-2xl bg-black/20 px-3 2xl:min-w-40" key={key}>
-          <span className="text-[11px] font-black uppercase tracking-[0.08em] text-[color:var(--muted)]">{label}</span>
+        <label className="flex h-12 min-w-0 items-center gap-2 rounded-2xl bg-black/20 px-2 sm:px-3 xl:min-w-32 xl:shrink-0 xl:gap-3 2xl:min-w-40" key={key}>
+          <span className="text-[9px] font-black uppercase tracking-[0.08em] text-[color:var(--muted)] sm:text-[11px]">{label}</span>
           <input
             aria-label={`${label} pressure`}
-            className="min-w-0 flex-1 accent-[color:var(--seva)]"
+            className="min-w-12 flex-1 accent-[color:var(--seva)]"
             max="100"
             min={key === 'weatherStress' ? '10' : '20'}
             onChange={(event) =>
@@ -290,7 +293,7 @@ function TopCommandBar({
             type="range"
             value={scenario[key as keyof Pick<Scenario, 'crowdIntensity' | 'weatherStress'>]}
           />
-          <strong className="tabular min-w-8 text-right text-sm text-[color:var(--text)]">
+          <strong className="tabular min-w-5 text-right text-xs text-[color:var(--text)] sm:min-w-8 sm:text-sm">
             {scenario[key as keyof Pick<Scenario, 'crowdIntensity' | 'weatherStress'>]}
           </strong>
         </label>
@@ -298,7 +301,7 @@ function TopCommandBar({
 
       <button
         aria-keyshortcuts="A"
-        className="command-focus ml-auto inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-2xl border border-[rgba(45,212,131,0.28)] bg-[rgba(45,212,131,0.14)] px-4 text-sm font-black text-[color:var(--seva)] transition-colors hover:bg-[rgba(45,212,131,0.2)]"
+        className="command-focus col-span-2 inline-flex h-12 min-w-0 items-center justify-center gap-2 rounded-2xl border border-[rgba(45,212,131,0.28)] bg-[rgba(45,212,131,0.14)] px-4 text-sm font-black text-[color:var(--seva)] transition-colors hover:bg-[rgba(45,212,131,0.2)] sm:col-span-4 xl:ml-auto xl:w-auto xl:shrink-0"
         onClick={onAddIncident}
         type="button"
       >
@@ -365,8 +368,8 @@ function IncidentBeacons({ incidents }: { incidents: Incident[] }) {
               className={`absolute grid size-7 place-items-center rounded-full ${toneClass(tone)}`}
               key={incident.id}
               style={{
-                left: `calc(${zone.coordinates.x}% + ${index % 2 === 0 ? 32 : -32}px)`,
-                top: `calc(${zone.coordinates.y}% + ${index % 2 === 0 ? -32 : 24}px)`,
+                left: `clamp(18px, calc(${zone.coordinates.x}% + ${index % 2 === 0 ? 28 : -28}px), calc(100% - 18px))`,
+                top: `clamp(18px, calc(${zone.coordinates.y}% + ${index % 2 === 0 ? -28 : 22}px), calc(100% - 18px))`,
               }}
             >
               <span className="live-ping absolute inset-0 rounded-full border border-current" />
@@ -403,7 +406,7 @@ function MapNode({
       type="button"
       whileHover={{ y: -2 }}
     >
-      <span className={`absolute left-1/2 top-1/2 size-20 -translate-x-1/2 -translate-y-1/2 rounded-full ${toneClass(tone)} opacity-20 ${selected ? 'scale-125' : ''}`} />
+      <span className={`absolute left-1/2 top-1/2 size-14 -translate-x-1/2 -translate-y-1/2 rounded-full sm:size-16 2xl:size-20 ${toneClass(tone)} opacity-20 ${selected ? 'scale-125' : ''}`} />
       <span className="command-glass relative hidden min-w-36 gap-1 p-3 text-left 2xl:grid">
         <span className="flex items-center justify-between gap-3">
           <span className="text-[11px] font-black uppercase tracking-[0.1em] text-[color:var(--muted)]">{zoneCode(plan.zone)}</span>
@@ -420,7 +423,7 @@ function MapNode({
           </span>
         )}
       </span>
-      <span className="command-glass relative grid size-16 place-items-center p-2 text-center 2xl:hidden">
+      <span className="command-glass relative grid size-12 place-items-center p-1.5 text-center sm:size-14 sm:p-2 2xl:hidden">
         <strong className="text-xs font-black text-[color:var(--text)]">{zoneCode(plan.zone)}</strong>
         <span className={`tabular rounded-full px-1.5 py-0.5 text-[10px] font-black ${toneClass(tone)}`}>{plan.risk}</span>
       </span>
@@ -490,19 +493,19 @@ function LiveMapCanvas({
   onSelectZone: (zoneId: string) => void
 }) {
   return (
-    <Glass className="relative h-full min-h-[560px] overflow-hidden p-0 xl:min-h-0" label="Live operational map">
+    <Glass className="relative h-[58vh] min-h-[390px] max-h-[560px] overflow-hidden p-0 sm:min-h-[460px] xl:h-full xl:min-h-0 xl:max-h-none" label="Live operational map">
       <div className="absolute inset-0 map-grid opacity-90" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_54%_55%,rgba(45,212,131,0.11),transparent_24%),radial-gradient(circle_at_18%_78%,rgba(56,189,248,0.12),transparent_28%),radial-gradient(circle_at_82%_22%,rgba(246,167,42,0.08),transparent_24%)]" />
-      <div className="absolute -left-[14%] top-[52%] h-[11%] w-[135%] rotate-[10deg] rounded-full bg-[rgba(56,189,248,0.14)]" />
-      <div className="absolute -left-[8%] top-[64%] h-[6%] w-[126%] -rotate-[16deg] rounded-full bg-[rgba(56,189,248,0.11)]" />
+      <div className="absolute left-0 top-[52%] h-[11%] w-full rotate-[10deg] rounded-full bg-[rgba(56,189,248,0.14)]" />
+      <div className="absolute left-0 top-[64%] h-[6%] w-full -rotate-[16deg] rounded-full bg-[rgba(56,189,248,0.11)]" />
       <div className="absolute left-[34%] top-[6%] h-[90%] w-3 rotate-[18deg] rounded-full bg-white/[0.05]" />
       <div className="absolute left-[4%] top-[75%] h-3 w-[92%] -rotate-[6deg] rounded-full bg-white/[0.05]" />
 
-      <div className="pointer-events-none absolute left-6 top-6 z-40">
-        <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[color:var(--muted)]">
+      <div className="pointer-events-none absolute left-4 top-4 z-40 sm:left-6 sm:top-6">
+        <p className="text-[9px] font-black uppercase tracking-[0.14em] text-[color:var(--muted)] sm:text-[11px]">
           Mahakumbh Live Operations
         </p>
-        <h1 className="mt-1 text-3xl font-black leading-none text-[color:var(--text)]">SevaGrid Command</h1>
+        <h1 className="mt-1 text-2xl font-black leading-none text-[color:var(--text)] sm:text-3xl">SevaGrid Command</h1>
       </div>
 
       <RouteLayer assignments={plan.assignments} />
@@ -692,13 +695,13 @@ function RightOperationsPanel({
   ]
 
   return (
-    <Glass className="flex min-h-[480px] flex-col overflow-hidden p-3 xl:min-h-0" label="Right operations panel">
+    <Glass className="flex min-h-[420px] max-h-[680px] flex-col overflow-hidden p-3 xl:min-h-0 xl:max-h-none" label="Right operations panel">
       <div className="grid grid-cols-3 gap-1 rounded-2xl bg-black/20 p-1">
         {tabs.map((tab) => {
           const Icon = tab.icon
           return (
             <button
-              className={`command-focus flex h-10 items-center justify-center gap-2 rounded-xl text-sm font-black transition-colors ${
+              className={`command-focus flex h-10 min-w-0 items-center justify-center gap-1.5 rounded-xl text-xs font-black transition-colors sm:gap-2 sm:text-sm ${
                 activeTab === tab.id ? 'bg-white/[0.09] text-[color:var(--text)]' : 'text-[color:var(--muted)] hover:text-[color:var(--text)]'
               }`}
               key={tab.id}
@@ -749,7 +752,7 @@ function ActivityLayer({
 
   return (
     <Glass className="overflow-hidden p-2" label="Bottom activity layer">
-      <div className="flex h-full min-h-12 items-center gap-3">
+      <div className="grid h-full min-h-12 gap-3 sm:flex sm:items-center">
         <button
           aria-label={collapsed ? 'Expand activity timeline' : 'Collapse activity timeline'}
           className="command-focus grid size-10 shrink-0 place-items-center rounded-2xl bg-white/[0.05] text-[color:var(--text)]"
@@ -759,12 +762,12 @@ function ActivityLayer({
           {collapsed ? <PanelBottomOpen aria-hidden="true" size={17} /> : <PanelBottomClose aria-hidden="true" size={17} />}
         </button>
 
-        <div className="min-w-36">
+        <div className="min-w-0 sm:min-w-36">
           <p className="text-[11px] font-black uppercase tracking-[0.12em] text-[color:var(--muted)]">Activity</p>
           <strong className="tabular text-sm text-[color:var(--text)]">{events.length} live events</strong>
         </div>
 
-        <div className={`grid min-w-0 flex-1 gap-2 ${collapsed ? 'grid-cols-3 xl:grid-cols-5' : 'grid-cols-1 xl:grid-cols-3'}`}>
+        <div className={`grid min-w-0 flex-1 gap-2 ${collapsed ? 'grid-cols-1 sm:grid-cols-2 xl:grid-cols-5' : 'grid-cols-1 xl:grid-cols-3'}`}>
           {events.slice(0, collapsed ? 5 : 9).map((event) => {
             const Icon = event.icon
             return (
@@ -941,7 +944,7 @@ export default function Home() {
           />
         </div>
 
-        <div className="flex items-center justify-end gap-2 xl:col-start-3 xl:row-start-1">
+        <div className="flex min-w-0 flex-wrap items-center justify-start gap-2 overflow-hidden xl:col-start-3 xl:row-start-1 xl:justify-end">
           <StatusPill>
             <Clock3 aria-hidden="true" size={13} />
             06:00-14:00

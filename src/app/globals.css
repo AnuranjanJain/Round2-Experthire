@@ -15,12 +15,14 @@
 html {
   background: #070b10;
   color-scheme: dark;
+  overflow-x: hidden;
 }
 
 body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
+  overflow-x: hidden;
   font-family: var(--font-sans);
   letter-spacing: 0;
   text-rendering: optimizeLegibility;
@@ -143,6 +145,12 @@ button:disabled {
 
 .command-scrollbar::-webkit-scrollbar-thumb {
   background: rgba(45, 212, 131, 0.32);
+}
+
+@supports (height: 100dvh) {
+  .min-h-screen {
+    min-height: 100dvh;
+  }
 }
 
 .glass-panel {
