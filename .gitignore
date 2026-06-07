@@ -27,3 +27,5 @@ dist-ssr
 
 .vercel
 outputs/
+submission/demo-video-assets/
+submission/*.webm
