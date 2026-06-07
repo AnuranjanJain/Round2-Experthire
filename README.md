@@ -47,19 +47,31 @@ The resulting plan prioritizes high-risk zones first and returns:
 
 ## Product Architecture
 
+SevaGrid Command is a single-page command-center application built with the Next.js App Router. The current hackathon version is intentionally local-data driven so judges can inspect the allocation model without needing credentials, API keys, or private infrastructure.
+
 - `src/data.ts`: typed volunteer roster, zone map, incidents, and scenario definitions.
 - `src/optimizer.ts`: deterministic scoring and deployment planning engine.
 - `src/app/page.tsx`: real-time command center surface, map nodes, route visualization, AI dispatch panel, and keyboard controls.
 - `src/app/globals.css`: dark command-center design tokens, glass system, map grid, motion, and accessibility styles.
+- `next.config.ts`: React strict mode and baseline production security headers.
+
+Runtime flow:
+
+1. Scenario, skill filter, selected zone, and live incident state are managed in the React command surface.
+2. The optimizer recalculates deployment targets, assignment scores, missing skills, and fairness metrics from typed local data.
+3. Map nodes, AI recommendations, incident queue, and volunteer suggestions all render from the same optimization output, keeping operational data spatially connected to the map.
+4. Vercel serves the production build as a static/prerendered Next.js app.
 
 ## Tech Stack
 
-- React 19
 - Next.js 16
+- React 19
 - TypeScript
 - Tailwind CSS 4
 - Framer Motion
 - lucide-react icons
+- ESLint
+- Vercel
 
 ## Run Locally
 
@@ -73,9 +85,51 @@ Then open the local URL printed by Next.js.
 ## Validate
 
 ```powershell
+npm run check
+```
+
+Individual checks:
+
+```powershell
 npm run lint
 npm run build
+npm audit --omit=dev
 ```
+
+Current validation status:
+
+- ESLint passed.
+- Production build passed.
+- TypeScript validation passed through `next build`.
+- Dependency audit passed with `0 vulnerabilities`.
+- Live deployment health check returned `200 OK`.
+
+Current test coverage:
+
+- This version does not yet include automated unit, integration, or end-to-end test suites.
+- The project is still testable through deterministic sample data, linting, TypeScript build validation, dependency audit, and manual UI/browser QA.
+- Recommended next test additions are listed in [Future Scope](#future-scope).
+
+## Security
+
+Security posture for the current deployment:
+
+- No backend secrets, API keys, database credentials, or user authentication flows are required for the demo.
+- No volunteer PII is collected; all roster and incident data is synthetic sample data.
+- `npm audit --omit=dev` currently reports `0 vulnerabilities`.
+- Production security headers are configured in `next.config.ts`:
+  - `Content-Security-Policy`
+  - `Referrer-Policy`
+  - `X-Content-Type-Options`
+  - `X-Frame-Options`
+  - `Permissions-Policy`
+- Vercel deploys the app over HTTPS.
+
+Security limitations:
+
+- The current Content Security Policy allows inline scripts/styles needed by the Next.js static app. A production system with real user data should move toward stricter nonce-based CSP.
+- There is no authentication or role-based access control because this is a public hackathon demo.
+- Real Mahakumbh deployment would need audit logs, encrypted storage, user roles, incident data retention rules, and privacy review before handling live volunteer or pilgrim data.
 
 ## Deploy
 
@@ -114,6 +168,8 @@ For Vercel, import the GitHub repository and keep the default Next.js build sett
 - The app is deployable as a Next.js static-rendered app on Vercel, Netlify, or any compatible host.
 - No backend, login, or external API key is required for the demo.
 - Sample data is intentionally local and transparent so judges can inspect the model behavior.
+- Live deployment: [https://sevagrid-command.vercel.app](https://sevagrid-command.vercel.app)
+- GitHub repository: [https://github.com/AnuranjanJain/Round2-Experthire](https://github.com/AnuranjanJain/Round2-Experthire)
 
 ## Future Scope
 
@@ -122,3 +178,8 @@ For Vercel, import the GitHub repository and keep the default Next.js build sett
 - Push assignments to WhatsApp/SMS dispatch providers.
 - Add supervisor acknowledgement and check-in history.
 - Train an incident forecast model from historical crowd and weather data.
+- Add unit tests for `src/optimizer.ts` to lock assignment scoring, fatigue guardrails, and missing-skill detection.
+- Add Playwright end-to-end tests for scenario switching, incident creation, skill filtering, keyboard shortcuts, and responsive command-center layout.
+- Add accessibility automation with axe-core and manual screen-reader QA for the map/inspector workflow.
+- Add authenticated operator roles for commander, sector lead, dispatch volunteer, and observer.
+- Add real-time transport with WebSockets or Server-Sent Events for incident updates and volunteer check-ins.
