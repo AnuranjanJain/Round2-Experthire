@@ -1,0 +1,27 @@
+Welcome to SevaGrid Command, a real-time volunteer operations command center built for Mahakumbh scale.
+
+This is not a traditional dashboard. The product is designed around one idea: when thousands of volunteers are supporting millions of pilgrims, every staffing decision must be spatial, explainable, and fast.
+
+The live map is the primary surface. Each sector node shows the zone name, risk score, coverage percentage, and deployment status. The route lines underneath the nodes show where responders are being moved, while incident beacons stay attached to the exact operating sector where help is needed.
+
+At the top, the command bar lets an operator switch the operational mode. Snan Surge increases pressure near ghats and transit corridors. Heat Alert changes the plan toward medical aid and water relief. Missing Person mode prioritizes child support, language help, and helpdesk coverage.
+
+The skill filter lets the commander inspect recommendations by capability, such as medical aid, crowd guidance, language support, logistics, security liaison, child support, or water relief. Crowd and heat sliders simulate real operational pressure, so the staffing plan responds as conditions change.
+
+Now watch what happens when a new incident is added. The incident enters the live queue, the affected sector becomes more urgent, and the dispatch plan updates around that new requirement. The operator can send a response ticket without leaving the command surface.
+
+The AI Dispatch panel explains who should move and why. Recommendations are ranked using skill fit, location, language coverage, incident match, mobility, fatigue, current workload, and fairness. This matters because a real deployment system should not just assign the closest person. It should close the highest-risk gap while protecting exhausted volunteers.
+
+The volunteer panel shows the suggested responders and reserve pool, so the operator can balance immediate response with workforce sustainability. The bottom activity layer records recent deployments and system events, giving the command team a live operational trail.
+
+This project directly fits the hackathon theme. It models volunteer profiles, manages availability and fatigue, allocates responders to sectors, monitors live incidents, and optimizes deployment based on skills, location, workload, and operational requirements.
+
+Technically, the app is built with Next.js, React, TypeScript, Tailwind CSS, Framer Motion, and Vercel. The optimizer is deterministic and explainable in source code, using typed local sample data so judges can inspect the behavior without credentials or API keys.
+
+The submission is also production-aware. It has HTTPS deployment, security headers, no backend secrets, no real personal data, passing lint, passing production build, and zero dependency audit vulnerabilities.
+
+Finally, the mobile version is stabilized for field review. It is not meant to replace the large command center, but it lets supervisors inspect the operation from smaller screens without broken overflow or unstable controls.
+
+The roadmap is clear: connect real volunteer signup data, add GIS route timing, supervisor acknowledgement, WhatsApp or SMS dispatch, authenticated roles, real-time check-ins, and incident forecasting.
+
+That is SevaGrid Command: a practical, map-first, AI-assisted workforce optimization system for coordinating Mahakumbh volunteers in real time.

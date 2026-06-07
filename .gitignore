@@ -28,4 +28,6 @@ dist-ssr
 .vercel
 outputs/
 submission/demo-video-assets/
+submission/youtube-demo-assets/
 submission/*.webm
+submission/*-long.mp4
