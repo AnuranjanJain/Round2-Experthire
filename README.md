@@ -8,6 +8,8 @@ Smart Volunteer Deployment & Workforce Optimization for Mahakumbh operations.
 
 [Presentation Demo Video](https://github.com/AnuranjanJain/Round2-Experthire/blob/main/submission/SevaGrid-Command-YouTube-Demo.mp4)
 
+[Premium Showcase Video](https://github.com/AnuranjanJain/Round2-Experthire/blob/main/submission/SevaGrid-Command-Premium-Showcase.mp4)
+
 SevaGrid Command is a working Next.js application that helps an operations team allocate volunteers across high-pressure zones using skills, location, workload, incident severity, and scenario pressure. It is built as a stable hackathon demo with deterministic sample data, a premium command UI, and an explainable optimization engine.
 
 ## Why This Exists
@@ -176,6 +178,7 @@ For Vercel, import the GitHub repository and keep the default Next.js build sett
 - GitHub repository: [https://github.com/AnuranjanJain/Round2-Experthire](https://github.com/AnuranjanJain/Round2-Experthire)
 - Presentation deck: [submission/SevaGrid-Command-Hackathon-Deck.pptx](https://github.com/AnuranjanJain/Round2-Experthire/blob/main/submission/SevaGrid-Command-Hackathon-Deck.pptx)
 - Presentation demo video: [submission/SevaGrid-Command-YouTube-Demo.mp4](https://github.com/AnuranjanJain/Round2-Experthire/blob/main/submission/SevaGrid-Command-YouTube-Demo.mp4)
+- Premium showcase video: [submission/SevaGrid-Command-Premium-Showcase.mp4](https://github.com/AnuranjanJain/Round2-Experthire/blob/main/submission/SevaGrid-Command-Premium-Showcase.mp4)
 
 ## Future Scope
 

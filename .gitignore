@@ -29,5 +29,6 @@ dist-ssr
 outputs/
 submission/demo-video-assets/
 submission/youtube-demo-assets/
+submission/premium-showcase-assets/
 submission/*.webm
 submission/*-long.mp4
